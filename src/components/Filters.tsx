@@ -1,4 +1,8 @@
-import { Heading, CheckboxFiltersGroup } from "@/components/index";
+import {
+  Heading,
+  CheckboxFiltersGroup,
+  SkeletonFilterGroup,
+} from "@/components/index";
 import {
   Input,
   Separator,
@@ -6,48 +10,25 @@ import {
   Label,
   Checkbox,
   Button,
-} from "@/components/ui/index";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+  RadioGroup,
+  RadioGroupItem,
+} from "@/components/ui";
+import { useQuery } from "react-query";
+import axios from "axios";
+
+async function fetchIngredients() {
+  return (await axios.get(`https://be59c100963cd288.mokky.dev/ingredients`))
+    .data;
+}
 
 function Filters() {
-  const ingredients = [
+  const { data, isLoading, isError } = useQuery(
+    "ingredients",
+    fetchIngredients,
     {
-      id: "1",
-      name: "ingredient",
-      title: "Сырный соус",
-      value: "cheese",
-    },
-    {
-      id: "2",
-      name: "ingredient",
-      title: "Моцарелла",
-      value: "mozzarella",
-    },
-    {
-      id: "3",
-      name: "ingredient",
-      title: "Чеснок",
-      value: "garlic",
-    },
-    {
-      id: "4",
-      name: "ingredient",
-      title: "Солённые огурчики",
-      value: "cucumbers",
-    },
-    {
-      id: "5",
-      name: "ingredient",
-      title: "Красный лук",
-      value: "onion",
-    },
-    {
-      id: "6",
-      name: "ingredient",
-      title: "Томаты",
-      value: "tomatoes",
-    },
-  ];
+      keepPreviousData: true,
+    }
+  );
 
   const sizes = [
     {
@@ -93,7 +74,7 @@ function Filters() {
         </Heading>
 
         {/* Тип теста */}
-        <div className="mb-8">
+        <div className="mb-8 font-Dodo">
           <Heading level="3" className="mb-4">
             Тип теста:
           </Heading>
@@ -124,7 +105,7 @@ function Filters() {
                 />
                 <Label
                   htmlFor={`${item.name}-${item.id}`}
-                  className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-Dodo"
                 >
                   {item.title}
                 </Label>
@@ -149,16 +130,24 @@ function Filters() {
         </div>
 
         <Separator className="mb-5" />
-
-        <CheckboxFiltersGroup
-          title="Ингредиенты:"
-          items={ingredients}
-          limit={4}
-          defaultItems={ingredients}
-          onChange={() => {}}
-          defaultValue={[]}
-          className="mb-6"
-        />
+        
+        {isLoading || isError ? (
+          <SkeletonFilterGroup
+            title="Ингредиенты:"
+            limit={4}
+            className="mb-6"
+          />
+        ) : (
+          <CheckboxFiltersGroup
+            title="Ингредиенты:"
+            items={data}
+            limit={4}
+            defaultItems={data}
+            onChange={() => {}}
+            defaultValue={[]}
+            className="mb-6"
+          />
+        )}
 
         <Button variant="default">Применить</Button>
       </div>

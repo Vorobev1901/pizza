@@ -2,11 +2,11 @@ import { Heading } from "@/components/index";
 import { Checkbox, Input, Label } from "@/components/ui/index";
 import { cn } from "@/lib/utils";
 
-type Item = { id: string; name: string; value: string; title: string };
+type TIngredient = { id: string; name: string; value: string; title: string };
 
 interface CheckboxFiltersGroupProps {
   title: string;
-  items: Item[];
+  items: TIngredient[];
   limit?: number;
   defaultItems?: Item[];
   className?: string;

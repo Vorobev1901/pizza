@@ -20,15 +20,15 @@ function Categroies() {
   const { isScreenXs, isScreenSm, isScreenMd, isScreenLg, isScreenXl, isScreenXxl } = useResize();
 
   const fetchCategories: Category[] = [
-    { name: "Все", path: "/" },
-    { name: "Мясные", path: "/meat" },
-    { name: "Острые", path: "/spicy" },
-    { name: "Сладкие", path: "/sweet" },
-    { name: "Вегетарианские", path: "/vegetarian" },
-    { name: "С курицей", path: "/chicken" },
-    { name: "С ананасом", path: "/pineapple" },
-    { name: "С колбасами", path: "/sausages" },
-    { name: "С солями", path: "/salts" },
+    { name: "Все", path: "/pizzas" },
+    { name: "Мясные", path: "meat" },
+    { name: "Острые", path: "spicy" },
+    { name: "Сладкие", path: "sweet" },
+    { name: "Вегетарианские", path: "vegetarian" },
+    { name: "С курицей", path: "chicken" },
+    { name: "С ананасом", path: "pineapple" },
+    { name: "С колбасами", path: "sausages" },
+    { name: "С солями", path: "salts" },
   ];
 
   const categories: Category[] = fetchCategories.slice(0, isScreenXxl ? 8 : isScreenXl ? 7 : isScreenLg ? 4 : isScreenMd ? 3 : isScreenSm ? 2 : isScreenXs ? 1 : 0);

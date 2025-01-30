@@ -1,9 +1,8 @@
 import "./App.css";
-import Header from "@/components/header";
-import {Separator} from "@/components/ui/index";
+import {Separator,} from "@/components/ui/index";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "@/components/NotFound";
-import Home from "@/components/Home";
+import {Header, Home} from "@/components/index";
 
 function App() {
   return (
@@ -14,7 +13,7 @@ function App() {
     </div>
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/pizzas" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

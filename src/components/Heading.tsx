@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import React, { useState } from "react";
+import React from "react";
 
 interface Heading {
   level: '1' | '2' | '3' | '4' | '5' | '6';
@@ -19,7 +19,7 @@ const Heading = ({ level, className, children} : Heading) => {
     '6': 'lg',
   }
   
-  return React.createElement(Heading, {className: cn(className, `text-${sizes[level]} font-JetBrains`)}, children);
+  return React.createElement(Heading, {className: cn(className, `text-${sizes[level]} font-bold`)}, children);
 };
 
 export default Heading;

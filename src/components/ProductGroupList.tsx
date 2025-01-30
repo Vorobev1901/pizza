@@ -1,38 +1,24 @@
-import ProductCard from "./ProductCard";
+import { TProduct } from "./Home";
+import { ProductCard } from "./index";
 
-const ProductGroupList = () => {
-  const description =
-    "Острая чоризо, острый перец халапеньо, соус барбекю, митболы, томаты, сладкий перец, красный лук, моцарелла";
-  const imageUrl =
-    "https://media.dodostatic.net/image/r:584x584/11ee7d6149eb101d8727573088fa2eff.avif";
-  const optionalIngredients = [
-    "Сырный бортик",
-    "Сливочная моцарелла",
-    "Сыры чеддер и пармезан",
-  ];
+type ProductGroupListProps = {
+  products: TProduct[];
+};
 
+const ProductGroupList = ({ products }: ProductGroupListProps) => {
   return (
-    <ul className="grid grid-cols-3 gap-12">
-      <ProductCard
-        title={"Сырный цыпленок"}
-        price={449}
-        description={description}
-        imageUrl={imageUrl}
-        optionalIngredients={optionalIngredients}
-      />
-      <ProductCard
-        title={"Диабло"}
-        price={395}
-        description={description}
-        imageUrl={imageUrl}
-      />
-      <ProductCard
-        title={"Чизбургер-пицца"}
-        price={649}
-        description={description}
-        imageUrl={imageUrl}
-      />
-    </ul>
+    <div className="grid grid-cols-3 gap-12">
+      {products.map((product) => (
+        <ProductCard
+          title={product.title}
+          price={product.variants[0].price}
+          description={product.description}
+          imageUrl={product.imageUrl}
+          optionalIngredients={product.optionalIngeredients}
+          key={product.id}
+        />
+      ))}
+    </div>
   );
 };
 
