@@ -1,25 +1,38 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-interface Heading {
-  level: '1' | '2' | '3' | '4' | '5' | '6';
-  className?: string,
-  children?: React.ReactNode,
+type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+interface Props {
+  size?: TitleSize;
+  className?: string;
+  text: string;
 }
 
-const Heading = ({ level, className, children} : Heading) => {
-  const Heading = `h${level}`;
+export const Heading: React.FC<Props> = ({ text, size = 'sm', className }) => {
+  const mapTagBySize = {
+    xs: 'h5',
+    sm: 'h4',
+    md: 'h3',
+    lg: 'h2',
+    xl: 'h1',
+    '2xl': 'h1',
+  } as const;
 
-  const sizes = {
-    '1': '5xl',
-    '2': '2xl',
-    '3': 'lg',
-    '4': 'lg',
-    '5': 'lg',
-    '6': 'lg',
-  }
-  
-  return React.createElement(Heading, {className: cn(className, `text-${sizes[level]} font-bold`)}, children);
+  const mapClassNameBySize = {
+    xs: 'text-[16px]',
+    sm: 'text-[22px]',
+    md: 'text-[26px]',
+    lg: 'text-[32px]',
+    xl: 'text-[40px]',
+    '2xl': 'text-[48px]',
+  } as const;
+
+  return React.createElement(
+    mapTagBySize[size],
+    { className: cn(mapClassNameBySize[size], className) },
+    text,
+  );
 };
 
 export default Heading;

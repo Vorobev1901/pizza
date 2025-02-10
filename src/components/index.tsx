@@ -13,5 +13,10 @@ import SkeletonProductCard from "@/components/SkeletonProductCard";
 import SkeletonGroupList from "@/components/SkeletonGroupList";
 import SkeletonFilterGroup from "@/components/SkeletonFilterGroup";
 import SearchInput from "@/components/SearchInput";
+import Product from "@/components/Product";
+import { BreadcrumbWithCustomSeparator } from "@/components/BreadcrumbWithCustomSeparator";
+import { ProductToggleVariants } from "@/components/ProductToggleVariants";
+import { ProductToggleIngredines } from "@/components/ProductToggleIngredines";
+import { Logo } from "@/components/Logo";
 
-export { Header, Home, Container, Heading, Categroies, Sort, Filters, CheckboxFiltersGroup, ProductCard, ProductGroupList, Paginator, SkeletonProductCard, SkeletonGroupList, SkeletonFilterGroup, SearchInput};
+export { Logo, Header, Home, Container, Heading, Categroies, Sort, Filters, CheckboxFiltersGroup, ProductCard, ProductGroupList, Paginator, SkeletonProductCard, SkeletonGroupList, SkeletonFilterGroup, SearchInput, Product, BreadcrumbWithCustomSeparator, ProductToggleVariants, ProductToggleIngredines};

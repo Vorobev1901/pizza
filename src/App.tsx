@@ -2,7 +2,7 @@ import "./App.css";
 import {Separator,} from "@/components/ui/index";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "@/components/NotFound";
-import {Header, Home} from "@/components/index";
+import {Header, Home, Product} from "@/components/index";
 
 function App() {
   return (
@@ -13,7 +13,8 @@ function App() {
     </div>
     <div>
       <Routes>
-        <Route path="/pizzas" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

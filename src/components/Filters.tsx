@@ -16,10 +16,19 @@ import {
 import { useQuery } from "react-query";
 import axios from "axios";
 
-async function fetchIngredients() {
+async function fetchIngredients(): Promise<Ingredient[]> {
   return (await axios.get(`https://be59c100963cd288.mokky.dev/ingredients`))
     .data;
 }
+
+export type Ingredient = {
+  id: string;
+  imageUrl: string;
+  name: string;
+  title: string;
+  value: string;
+  price: number;
+};
 
 function Filters() {
   const { data, isLoading, isError } = useQuery(
@@ -69,15 +78,11 @@ function Filters() {
   return (
     <>
       <div className="flex flex-col">
-        <Heading level="2" className="mb-8">
-          Фильтрация
-        </Heading>
+        <Heading size={"lg"} className="mb-8" text="Фильтрация" />
 
         {/* Тип теста */}
         <div className="mb-8 font-Dodo">
-          <Heading level="3" className="mb-4">
-            Тип теста:
-          </Heading>
+          <Heading size={"md"} className="mb-4" text="Тип теста:" />
           <RadioGroup defaultValue={"traditional"}>
             {types.map((item, i) => (
               <div className="flex items-center space-x-2" key={i}>
@@ -92,9 +97,7 @@ function Filters() {
 
         {/* Размеры */}
         <div className="mb-6">
-          <Heading level="3" className="mb-4">
-            Размеры
-          </Heading>
+          <Heading size={"md"} className="mb-4" text="Размеры:" />
           <div className="flex flex-col gap-y-4 items-start">
             {sizes.map((item, i) => (
               <div className="flex items-center space-x-2" key={i}>
@@ -118,9 +121,7 @@ function Filters() {
 
         {/* Фильтрация цен */}
         <div className="mb-6">
-          <Heading level="3" className="mb-4">
-            Цена от и до:
-          </Heading>
+          <Heading size={"md"} className="mb-4" text="Цена от и до:" />
           <div className="flex gap-4 mb-5">
             <Input type="number" placeholder="0" min={0} max={100} />
             <Input type="number" placeholder="100" min={0} max={100} />
@@ -130,7 +131,7 @@ function Filters() {
         </div>
 
         <Separator className="mb-5" />
-        
+
         {isLoading || isError ? (
           <SkeletonFilterGroup
             title="Ингредиенты:"
@@ -140,7 +141,7 @@ function Filters() {
         ) : (
           <CheckboxFiltersGroup
             title="Ингредиенты:"
-            items={data}
+            items={data || []}
             limit={4}
             defaultItems={data}
             onChange={() => {}}

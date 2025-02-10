@@ -13,13 +13,13 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
-type TVariant = {
-  size: string;
+export type TVariant = {
+  size: number;
   price: number;
 };
 
 export type TProduct = {
-  id: number;
+  id: string;
   title: string;
   category: string;
   type: string;
@@ -30,9 +30,11 @@ export type TProduct = {
   imageUrl: string;
 };
 
-async function fetchPizzas(page: number, limit: number) {
+async function fetchProducts(page: number, limit: number) {
   return (await axios.get(
-    `https://be59c100963cd288.mokky.dev/pizzas?page=${page}&limit=${limit}`
+    `https://be59c100963cd288.mokky.dev/pizzas`, {
+      params: {page, limit }
+    }
   )).data;
 }
 
@@ -46,8 +48,8 @@ function Home() {
   const [currentLimit] = useState<number>(limit);
 
   const {data, isLoading, isError} = useQuery(
-    ['pizzas', currentPage], 
-    ()  => fetchPizzas(currentPage, currentLimit),
+    ['products', currentPage], 
+    ()  => fetchProducts(currentPage, currentLimit),
     {
       keepPreviousData: true,
     }
@@ -70,9 +72,7 @@ function Home() {
   return (
     <>
       <Container className="mt-10 mb-16">
-        <Heading level="1" className="mb-5">
-          Все пиццы
-        </Heading>
+        <Heading size={'xl'} className="mb-5" text="Все пиццы" />
         <div className="flex justify-between items-start mb-9">
           <Categroies />
           <Sort />
@@ -84,8 +84,8 @@ function Home() {
           <div className="w-full flex flex-col gap-y-16">
             {
               !isLoading && !isError ?
-              <ProductGroupList products={data.items}/> :
-              <SkeletonGroupList length={limit || 6}/>
+              <ProductGroupList products={data.items} className="grid grid-cols-3 gap-12"/> :
+              <SkeletonGroupList length={limit || 6} className="grid grid-cols-3 gap-12"/>
             }
            
             { !isLoading && !isError && (

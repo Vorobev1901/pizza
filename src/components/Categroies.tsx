@@ -20,7 +20,7 @@ function Categroies() {
   const { isScreenXs, isScreenSm, isScreenMd, isScreenLg, isScreenXl, isScreenXxl } = useResize();
 
   const fetchCategories: Category[] = [
-    { name: "Все", path: "/pizzas" },
+    { name: "Все", path: "/" },
     { name: "Мясные", path: "meat" },
     { name: "Острые", path: "spicy" },
     { name: "Сладкие", path: "sweet" },
@@ -43,7 +43,7 @@ function Categroies() {
         {categories.map((category, i) => (
           <Button
             className={cn(
-              pathname === category.path && "shadow-sm bg-white text-primary"
+              pathname === category.path && "shadow-[rgba(6,_5,_50,_0.19)_0px_6px_20px] bg-white text-primary"
             )}
             variant="ghost"
             key={i}

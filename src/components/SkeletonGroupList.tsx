@@ -1,12 +1,14 @@
+import { cn } from "@/lib/utils";
 import {  SkeletonProductCard } from "./index";
 
 type SkeletopGroupListProps = {
-  length: number
+  length: number;
+  className?: string;
 };
 
-const SkeletopGroupList = ({length}: SkeletopGroupListProps) => {
+const SkeletopGroupList = ({length, className}: SkeletopGroupListProps) => {
   return (
-    <div className="grid grid-cols-3 gap-12">
+    <div className={cn(className)}>
       <>
           {Array.from({ length: length }, (_, index) => (
             <SkeletonProductCard key={index} />

@@ -8,7 +8,7 @@ interface CheckboxFiltersGroupProps {
   title: string;
   items: TIngredient[];
   limit?: number;
-  defaultItems?: Item[];
+  defaultItems?: TIngredient[];
   className?: string;
   searchInputPlaceholder?: string;
   onChange?: () => void;
@@ -27,9 +27,8 @@ const CheckboxFiltersGroup = ({
 }: CheckboxFiltersGroupProps) => {
   return (
     <div className={cn(className, "flex flex-col")}>
-      <Heading level="3" className="mb-4">
-        {title}
-      </Heading>
+
+      <Heading size={'md'} className="mb-8" text={title} />
 
       <div className="mb-4">
         <Input placeholder={searchInputPlaceholder} />
